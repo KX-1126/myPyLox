@@ -1,4 +1,4 @@
-This responsitory is my implementation of the Lox language in the book *Craft Interpreters*, the offical repo is in [here](https://github.com/munificent/craftinginterpreters).
+This repository is my implementation of the Lox language in the book *Craft Interpreters*, the offical repo is in [here](https://github.com/munificent/craftinginterpreters).
 
 # Progress of Chapter 2
 
@@ -13,4 +13,4 @@ This responsitory is my implementation of the Lox language in the book *Craft In
 * [ ] Classes
 * [ ] Inheritance
 
-Thanks for [this project](https://github.com/MtScience/PyLox) when i had trouble implementating Lox it in Python.
+Thanks for [this project](https://github.com/MtScience/PyLox) when I had trouble implementing Lox in Python.
