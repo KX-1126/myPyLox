@@ -17,7 +17,7 @@ class Lox:
     
     def run_prompt(self):
         while True:
-            print(">>> ")
+            print(">>>", end=' ', flush=True)
             line = sys.stdin.readline()
             if line == None:
                 break
@@ -26,17 +26,19 @@ class Lox:
                 self.hasError = False
 
     def __run(self,source):
-        scanner = Scanner()
-        tokens = scanner.scanTokens(source)
-
+        scanner = Scanner(source=source,tokens=[],lox=self)
+        tokens = scanner.scan_tokens()
+        if len(tokens) == 0:
+            print('no token scanned')
+            exit()
         for token in tokens:
-            print(token)
+            print(token.toString())
 
-    def __error(self,line:int,message:str):
-        self.report(line, "", message)
+    def error(self,line:int,message:str):
+        self.__report(line, "", message)
     
     def __report(self,line: int, where:str, message:str):
-        print("[line " + line + "] Error " + where + ":" + message)
+        print("[line " + str(line) + "] Error " + where + ":" + message)
         hasError = True
 
 if __name__ == "__main__":

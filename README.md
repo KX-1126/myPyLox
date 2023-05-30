@@ -13,4 +13,6 @@ This repository is my implementation of the Lox language in the book *Craft Inte
 * [ ] Classes
 * [ ] Inheritance
 
+**Notice**: In my Python code, I mix camel case naming and underscore naming conventions. This is a habit I carried over from writing Swift, but you should not use this approach. You should instead use the recommended underscore naming convention in Python.
+
 Thanks for [this project](https://github.com/MtScience/PyLox) when I had trouble implementing Lox in Python.
