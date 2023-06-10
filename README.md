@@ -3,7 +3,7 @@ This repository is my implementation of the Lox language in the book *Craft Inte
 # Progress of Chapter 2
 
 * [x] Scanning *2023/5/30*
-* [ ] Representing Code
+* [x] Representing Code *2023/6/10*
 * [ ] Parsing Expressions
 * [ ] Evalute Expressions
 * [ ] Statements and State
