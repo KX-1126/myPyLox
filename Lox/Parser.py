@@ -4,18 +4,23 @@ from typing import List
 from Expr import  Visitor,Expr,Binary,Literal,Unary,Grouping
 
 class parseError(Exception):
-    def __init__(self, *args: object, message) -> None:
-        super().__init__(*args)
+    def __init__(self, message) -> None:
         self.message = message
     
     def __str__(self) -> str:
         return f"parseError: {self.message}"
 
 class Parser:
-    def __init__(self, tokens:List(Token), lox) -> None:
+    def __init__(self, tokens:List[Token], lox) -> None:
         self.tokens = tokens
         self.current = 0
         self.lox = lox
+    
+    def parse(self) -> Expr:
+        try:
+            return self.__expression()
+        except parseError as e:
+            print(parseError)
     
     def __expression(self):
         return self.__equality()
@@ -81,12 +86,15 @@ class Parser:
             return Literal(None)
         
         if self.__match(TokenType.NUMBER,TokenType.STRING):
-            return Literal(self.__previous().literal)
+            l = self.__previous().literal
+            return Literal(l)
 
         if self.__match(TokenType.LEFT_PAREN):
             e = self.__expression()
             self.__consume(TokenType.RIGHT_PAREN, "Expect ')' after expression")
             return Grouping(e)
+        
+        raise self.__error(self.__peek(),"Expect expression")
     
     def __consume(self,type,message):
         if self.__check(type):
@@ -95,8 +103,23 @@ class Parser:
         raise self.__error(self.__peek(),message)
     
     def __error(self,token,message):
-        self.lox.error(token,message)
-        return parseError('')
+        self.lox.parseError(token,message)
+        return parseError(message='error when parsing')
+    
+    def __synchronize(self,token,message): # discard tokens until reaching the end
+        self.__advance()
+
+        while (not self.__isAtEnd()):
+            if self.__previous().type == TokenType.SEMICOLON:
+                return
+            
+            match self.__peek().type:
+                # stop advance until reach a new line start with keywords
+                case TokenType.CLASS | TokenType.FUN | TokenType.VAR | TokenType.IF | TokenType.WHILE | TokenType.PRINT | TokenType.RETURN:
+                    return
+                
+            self.__advance()
+
 
     # helpers
     def __match(self,*types): # match one type will return true
@@ -113,7 +136,7 @@ class Parser:
         return self.__peek().type == type
     
     def __advance(self):
-        if self.__isAtEnd():
+        if not self.__isAtEnd():
             self.current += 1
         return self.__previous()
     

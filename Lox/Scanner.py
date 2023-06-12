@@ -105,7 +105,7 @@ class Scanner:
             case _:
                 if (self.__isDigit(c)):
                     self.__number()
-                if (self.__isAlpha(c)):
+                elif (self.__isAlpha(c)):
                     self.__identifier()
                 else:
                     self.lox.error(self.line,'Unexpected character: ' + c)
