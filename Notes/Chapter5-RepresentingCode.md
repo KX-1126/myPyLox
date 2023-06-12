@@ -29,7 +29,7 @@ e = Binary(Unary(Token(TokenType.MINUS,"-",None,1),
                  Token(TokenType.STAR,"*",None,1),
                  Grouping(Literal(45.67))
                      )
-    
+
 ast_printer = ast_printer()
 ast_printer.print(e)
 

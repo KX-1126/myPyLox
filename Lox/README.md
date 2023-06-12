@@ -4,7 +4,7 @@ This repository is my implementation of the Lox language in the book *Craft Inte
 
 * [x] Scanning *2023/5/30*
 * [x] Representing Code *2023/6/10*
-* [ ] Parsing Expressions
+* [x] Parsing Expressions *2023/6/12*
 * [ ] Evalute Expressions
 * [ ] Statements and State
 * [ ] Control Flow
