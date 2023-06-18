@@ -155,7 +155,7 @@ class Scanner:
         self.__advance()
 
         str_val = self.source[self.start+1:self.current-1]
-        self.__add_token(TokenType.STRING,str)
+        self.__add_token(TokenType.STRING,str_val)
 
     def __peek(self):
         if self.reach_end():
